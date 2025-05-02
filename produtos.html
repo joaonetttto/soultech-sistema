@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos Cadastrados</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .product-list {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item button {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Produtos Cadastrados</h1>
+
+        <div class="product-list" id="product-list">
+            <!-- Produtos serão carregados aqui -->
+        </div>
+
+        <div class="btn-container">
+            <a href="cadastrar-produto.html" class="btn">Cadastrar Novo Produto</a>
+        </div>
+    </div>
+
+    <script>
+        // Carregar produtos do localStorage
+        const productList = document.getElementById('product-list');
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+
+        // Exibir os produtos
+        function displayProducts() {
+            productList.innerHTML = '';
+            products.forEach((product, index) => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product-item');
+                productElement.innerHTML = `
+                    <p>${product}</p>
+                    <button onclick="deleteProduct(${index})">Excluir</button>
+                `;
+                productList.appendChild(productElement);
+            });
+        }
+
+        // Excluir produto
+        function deleteProduct(index) {
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
+        }
+
+        displayProducts();
+    </script>
+
+</body>
+</html>

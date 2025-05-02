@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .product-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-back {
+            background-color: #ccc;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .btn-back:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cadastrar Novo Produto</h1>
+        
+        <div class="product-selection">
+            <!-- Camisas -->
+            <div class="product-card" onclick="selectProduct('Camisa Preta')">
+                <img src="https://via.placeholder.com/150x150.png?text=Camisa+Preta" alt="Camisa Preta">
+                <p>Camisa Preta</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Camisa Azul')">
+                <img src="https://via.placeholder.com/150x150.png?text=Camisa+Azul" alt="Camisa Azul">
+                <p>Camisa Azul</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Camisa Branca')">
+                <img src="https://via.placeholder.com/150x150.png?text=Camisa+Branca" alt="Camisa Branca">
+                <p>Camisa Branca</p>
+            </div>
+            
+            <!-- Calças -->
+            <div class="product-card" onclick="selectProduct('Calça Jeans')">
+                <img src="https://via.placeholder.com/150x150.png?text=Calça+Jeans" alt="Calça Jeans">
+                <p>Calça Jeans</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Calça Preta')">
+                <img src="https://via.placeholder.com/150x150.png?text=Calça+Preta" alt="Calça Preta">
+                <p>Calça Preta</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Calça Cargo')">
+                <img src="https://via.placeholder.com/150x150.png?text=Calça+Cargo" alt="Calça Cargo">
+                <p>Calça Cargo</p>
+            </div>
+
+            <!-- Tênis -->
+            <div class="product-card" onclick="selectProduct('Tênis Esportivo')">
+                <img src="https://via.placeholder.com/150x150.png?text=Tênis+Esportivo" alt="Tênis Esportivo">
+                <p>Tênis Esportivo</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Tênis Casual')">
+                <img src="https://via.placeholder.com/150x150.png?text=Tênis+Casual" alt="Tênis Casual">
+                <p>Tênis Casual</p>
+            </div>
+            <div class="product-card" onclick="selectProduct('Tênis de Corrida')">
+                <img src="https://via.placeholder.com/150x150.png?text=Tênis+de+Corrida" alt="Tênis de Corrida">
+                <p>Tênis de Corrida</p>
+            </div>
+        </div>
+
+        <button class="btn" onclick="registerProduct()">Cadastrar Produto</button>
+
+        <br>
+        <a href="produtos.html" class="btn-back">Voltar para Produtos Cadastrados</a>
+    </div>
+
+    <script>
+        let selectedProduct = '';
+
+        function selectProduct(product) {
+            selectedProduct = product;
+            alert('Produto Selecionado: ' + product);
+        }
+
+        function registerProduct() {
+            if (selectedProduct) {
+                // Salva o produto no localStorage
+                let products = JSON.parse(localStorage.getItem('products')) || [];
+                products.push(selectedProduct);
+                localStorage.setItem('products', JSON.stringify(products));
+
+                alert('Produto ' + selectedProduct + ' cadastrado com sucesso!');
+                window.location.href = 'produtos.html';
+            } else {
+                alert('Por favor, selecione um produto para cadastrar.');
+            }
+        }
+    </script>
+
+</body>
+</html>
